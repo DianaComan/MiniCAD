@@ -1,0 +1,53 @@
+===============================================================
+Nume: Coman Diana Stefania
+Tema: MiniCad
+================================================================
+Constructie
+Tema e alcatuita din mai multe clase:
+
+interfatele Shape si ShapeVisitor - 
+   folosite pt implerea formelor si vizitarea acestora
+   ShapeVisitor face parte din implementarea visitor patternului
+
+clasa globals - retine dimensiunile formelor ce trebuie desenate
+
+clasele Canvas, Square, Triangle, Rectagle, Line, Diamond, Polygon si Circle - 
+	clase care implementeaza formele prin interfata Shape si prezinta formele care vor 
+     fi utilizate pentru a slabili forma ce trebuie desenata. Se folosesc de visitor pattern
+	 pt acest lucru
+	implementeaza si Singleton Visitor
+	 
+clasele LineDrawing si CircleDrawing - 
+    deseneaza conturul liniilor, pt creerea formelor, si conturul cercului
+	utilizeaza algoritmii lui Brehensam pt desenarea liniilor, respectiv a cercului
+	
+clasa ShapeFactory - 
+	verifica care forma trebuie desenata si apoi se duce in ShapeDisplayVisitor
+	  sa o deseneze
+	implementarea Factory Pattern
+	
+clasa FloodFill - 
+    realizeaza umplerea formelor, folosind metoda cu Queue, fiind mai rapida
+	 tehnic, verifica daca punctul se afla in limitele imaginii, daca e nemodificat, daca e
+	 diferit de culoarea conturului, in caz pozitiv se coloreaza punctul, iar procesul 
+	 se aplica vecinilor sai
+	
+clasa ShapeDisplayVisitor
+    implementarea Visitor Pattern
+	deseneaza formele folosindu-se de clasele de mai sus
+	pt fiecare forna, se retine culoarea, culorile ce for fi utilizate in rgb si rgb2
+	in cazul Canvas-ului, imaginea se umple pixel cu pixel, cu doua for-uri
+	in cazul Line-ului, se utilizeaza clasa LineDrawing pentru desenarea liniei
+	in cazul Patratului si Dreptunchiului, se se utilizeaza clasa LineDrawing pentru desenarea 
+	  conturului, iar umplerea se face cu doua for-uri
+	in cazul Poligonului, al Triunghiului si Rombului, se utilizeaza clasa LineDrawing pentru 
+	   desenarea conturului si FloodFill pentru umplerea formei
+	in cazul Cercului  se utilizeaza clasa CircleDrawing pentru desenarea conturului si FloodFill
+     	pentru umplerea formei
+		
+clasa Main
+	citirea datelor si prelucrarea lor
+	pt citirea din fisier se foloseste Scanner
+	se citeste numarul de forme, apoi pentru fiecare forma se citesc datele specifice lor in globals, 
+       apoi se foloseste ShapeFactory si ShapeDisplayVisitor pt desenarea fiecarei forme in parte
+	culorile sunt formate din datele citite
